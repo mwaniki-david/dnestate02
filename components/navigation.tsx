@@ -41,14 +41,10 @@ const routes = [
     href: "/billing",
     label: "Billing & invoice",
   },
-  {
-    href: "/report",
-    label: "Report",
-  },
-  {
-    href: "/settings",
-    label: "Settings",
-  },
+  // {
+  //   href: "/report",
+  //   label: "Report",
+  // },
 ];
 
 export const Navigation = () => {

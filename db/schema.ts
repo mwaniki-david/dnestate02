@@ -1,6 +1,7 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, integer, text } from 'drizzle-orm/pg-core';
+import { pgTable, text, varchar, numeric, timestamp, serial } from 'drizzle-orm/pg-core';
 import { createInsertSchema } from 'drizzle-zod';
+import { z } from 'zod';
 // Define the table with correct schema and column names
 export const tenant = pgTable(
   'tenant',
@@ -12,7 +13,7 @@ export const tenant = pgTable(
     phoneNo: text('phone_no').notNull(),
     buildingName: text("building_name").notNull(),
     unitType: text('unit_type').notNull(),
-    rentalAmount: integer('rentalamount').notNull(),
+    rentalAmount: text('rentalamount').notNull(),
   });
 export const insertTenantSchema = createInsertSchema(tenant)
 
@@ -31,11 +32,11 @@ export const building = pgTable(
     userId: text('user_id').notNull(),   // User ID, cannot be null
 
     // New fields
-    floors: integer('floors').notNull().default(2),                // Number of floors, integer type, cannot be null
+    floors: text('floors').notNull(),                // Number of floors, integer type, cannot be null
     ownersName: text('owners_name').notNull().default('Unknown'),          // Owner's name, text type, cannot be null
     ownersPhoneNo: text('owners_phone_no').notNull(),   // Owner's phone number, text type, cannot be null
     location: text('location').notNull().default('Unknown'),               // Location of the building, text type, cannot be null
-    buildingUnits: integer('building_units').notNull().default(1), // Number of building units, integer type, cannot be null
+    buildingUnits: text('building_units').notNull(), // Number of building units, integer type, cannot be null
   }
 );
 
@@ -66,7 +67,7 @@ export const houses = pgTable(
     phoneNo: text('phone_no').notNull(),
     buildingName: text('building_name'),
     unitType: text('unit_type').notNull(),
-    rentalAmount: integer('rentalamount').notNull(),
+    rentalAmount: text('rentalamount').notNull(),
   });
 export const insertHousesSchema = createInsertSchema(houses)
 
@@ -80,6 +81,37 @@ export const unit = pgTable(
     buildingName: text('building_name').notNull(),
   });
 export const inserUnitrSchema = createInsertSchema(unit)
+
+export const invoice = pgTable("invoice", {
+  id: varchar("id", { length: 255 }).primaryKey(),
+  userId: varchar("user_id", { length: 255 }).notNull(),
+  customerName: varchar("customer_name", { length: 255 }).notNull(),
+  amount: numeric("amount").notNull(),
+  dueDate: timestamp("due_date").notNull(),
+  status: varchar("status", { length: 50 }).default("pending"),
+});
+
+export const insertInvoiceSchema = z.object({
+  customerName: z.string(),
+  amount: z.string(), // Since 'numeric' is stored as a string in PostgreSQL
+  dueDate: z.string(), // Dates as ISO strings
+  status: z.string().optional(),
+});
+
+export const inserInvoiceSchema = createInsertSchema(invoice)
+
+export const payments = pgTable('payments', {
+  id: serial('id').primaryKey(),
+  phoneNumber: varchar('phone_number', { length: 15 }).notNull(),
+  amount: numeric('amount').notNull(),
+  tillNumber: varchar('till_number', { length: 15 }).notNull(),
+  status: varchar('status', { length: 50 }).default('pending'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+
+export const inserpaymentsSchema = createInsertSchema(payments)
+
 
 // import { pgTable, text, integer, foreignKey, serial } from 'drizzle-orm/pg-core';
 

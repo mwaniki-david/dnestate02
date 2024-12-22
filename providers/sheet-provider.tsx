@@ -2,6 +2,8 @@
 
 import { EditTenantSheet } from "@/features/accounts/components/edit-tenant-sheet ";
 import {  NewTenantSheet } from "@/features/accounts/components/new-tenant-sheet";
+import { EditinvoiceSheet } from "@/features/billing/components/edit-invoice-sheet ";
+import { NewInvoiceSheet } from "@/features/billing/components/new-invoice-sheet";
 import { EditBuildingSheet } from "@/features/building/components/edit-building-sheet ";
 import { NewBuildingSheet } from "@/features/building/components/new-building-sheet";
 import { EditbuildingOwnerSheet } from "@/features/buildingOwner/components/edit-buildingOwner-sheet ";
@@ -18,7 +20,7 @@ export const SheetProvider = () => {
     return (
         <>
         <NewBuildingOwnerSheet/>
-        {/* <EditBuildingOwnerSheet/> */}
+        <EditbuildingOwnerSheet/>
         <NewHouseSheet/>
         {/* <EditHouseSheet/> */}
         <NewunitSheet/>
@@ -27,6 +29,8 @@ export const SheetProvider = () => {
         <EditTenantSheet/>
         <NewBuildingSheet/>
         <EditBuildingSheet/>
+        <NewInvoiceSheet/>
+        <EditinvoiceSheet/>
         </>
     )
 }

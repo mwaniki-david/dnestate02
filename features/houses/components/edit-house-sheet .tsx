@@ -27,7 +27,7 @@ const formSchema = insertHousesSchema.pick({
 
 type FormValues = z.input<typeof formSchema>;
 
-export const EditBuildingSheet = () => {
+export const EditHouseSheet = () => {
   const { isOpen, onClose, id } = UseOpenHouse();
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
@@ -75,7 +75,7 @@ export const EditBuildingSheet = () => {
         houseName: "",
         phoneNo: "",
         buildingName: "",
-        rentalAmount: 0,
+        rentalAmount: "",
         unitType: "",
       };
 
@@ -85,9 +85,9 @@ export const EditBuildingSheet = () => {
       <Sheet open={isOpen} onOpenChange={onClose}>
         <SheetContent className="space-y-4">
           <SheetHeader>
-            <SheetTitle>Edit building</SheetTitle>
+            <SheetTitle>Edit House</SheetTitle>
             <SheetDescription>
-              edit building account to track each transactions.
+              edit House to track each transactions.
             </SheetDescription>
           </SheetHeader>
           {isLoading ? (

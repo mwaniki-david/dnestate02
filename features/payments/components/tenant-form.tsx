@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { insertTenantSchema } from "@/db/schema";
 import {
   Form,
   FormControl,
@@ -14,12 +15,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { z } from "zod";
-import { inserUnitrSchema } from "@/db/schema";
 
-const formSchema = inserUnitrSchema.pick({
+const formSchema = insertTenantSchema.pick({
   name: true,
   phoneNo: true,
   buildingName: true,
+  rentalAmount: true,
+  unitName: true,
+  unitType: true,
 });
 
 type FormValues = z.input<typeof formSchema>;
@@ -32,7 +35,7 @@ type Props = {
   disabled?: boolean;
 };
 
-export const UnitForm = ({
+export const TenantForm = ({
   id,
   defaultValues,
   onSubmit,
@@ -109,10 +112,60 @@ export const UnitForm = ({
               </FormItem>
             )}
           />
-        
+          <FormField
+            name="rentalAmount"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>rental Amount</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={disabled}
+                    placeholder="e.g ksh10,000"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex gap-4 ">
+        <FormField
+            name="unitName"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>unitName</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={disabled}
+                    placeholder="e.g 6D"
+                    {...field}
+                    value={field.value ?? ""}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="unitType"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>unitType</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={disabled}
+                    placeholder="e.g 1 brdroom"
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
         </div>
         <Button className="w-full" disabled={disabled}>
-          {id ? "save changes" : "create unit account"}
+          {id ? "save changes" : "create invoice account"}
         </Button>
         {!!id && (
           <Button

@@ -2,7 +2,6 @@ import { db } from "@/db/drizzle";
 import { tenant, insertTenantSchema } from "@/db/schema";
 import { getAuth, clerkMiddleware } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
-import { createId } from "@paralleldrive/cuid2";
 import { and, eq, inArray } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
@@ -68,47 +67,7 @@ const app = new Hono()
     }
   )
  
-    .post(
-      "/",
-      clerkMiddleware(),
-      zValidator(
-        "json",
-        insertTenantSchema.pick({
-          name: true,
-          phoneNo: true,
-          rentalAmount: true,
-          unitType: true,
-          buildingName: true,
-          unitName: true,
-        })
-      ),
-      async (c) => {
-        const auth = getAuth(c);
-        const values = c.req.valid("json");
   
-        if (!auth?.userId) {
-          return c.json({ error: "Unauthorised " }, 401);
-        }
-  
-        const [data] = await db
-          .insert(tenant)
-          .values({
-            id: createId(), // Auto-generate the ID
-            userId: auth.userId,
-            ...values,
-            // name: values.name, // The tenant name
-            // userId: auth.userId, // The user ID
-            // floors: building.floors,
-            // ownersName: building.ownersName,
-            // ownersPhoneNo: building.ownersPhoneNo,
-            // location: building.location,
-            // buildingUnits: building.buildingUnits,
-          })
-          .returning();
-  
-        return c.json({ data });
-      }
-    )
   .post(
     "/bulk-delete",
     clerkMiddleware(),
@@ -221,4 +180,3 @@ const app = new Hono()
   );
 
 export default app;
-

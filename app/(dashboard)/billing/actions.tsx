@@ -7,8 +7,8 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { useDeleteBuilding } from "@/features/building/api/use-delete-building ";
-import { UseOpenBuilding } from "@/features/building/hooks/use-open-building";
+import { useDeleteinvoice } from "@/features/billing/api/use-delete-invoice";
+import { UseOpenInvoice } from "@/features/billing/hooks/use-open-invoice";
 import { useConfirm } from "@/hooks/use-confirm";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
@@ -19,10 +19,10 @@ type Props = {
 export const Actions = ( { id }: Props) => {
     const [ConfirmDialog, confirm] = useConfirm(
         "Are you sure?",
-        "You are about to delete this tenant."
+        "You are about to delete this buildingowner."
     );
-    const deleteMutation =useDeleteBuilding(id);
-    const { onOpen } = UseOpenBuilding();
+    const deleteMutation =useDeleteinvoice(id);
+    const { onOpen } = UseOpenInvoice();
 
     const handleDelete = async () => {
         const ok = await confirm();

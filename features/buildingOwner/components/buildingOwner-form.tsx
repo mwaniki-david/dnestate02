@@ -112,7 +112,7 @@ export const BuildingOwnerForm = ({
         
         </div>
         <Button className="w-full" disabled={disabled}>
-          {id ? "save changes" : "create tenant account"}
+          {id ? "save changes" : "create buildingOwner account"}
         </Button>
         {!!id && (
           <Button

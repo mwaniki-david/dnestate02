@@ -8,6 +8,13 @@
       "when": 1732009581684,
       "tag": "0000_melodic_sugar_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1733908006558,
+      "tag": "0001_romantic_the_anarchist",
+      "breakpoints": true
     }
   ]
 }

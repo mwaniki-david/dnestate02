@@ -4,22 +4,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { insertInvoiceSchema } from "@/db/schema";
 import {
   Form,
   FormControl,
   FormField,
-  FormFields,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { z } from "zod";
-import { inserUnitrSchema } from "@/db/schema";
 
-const formSchema = inserUnitrSchema.pick({
-  name: true,
-  phoneNo: true,
-  buildingName: true,
+const formSchema = insertInvoiceSchema.pick({
+  customerName: true,
+  amount: true,
+  dueDate: true,
+  status: true,
 });
 
 type FormValues = z.input<typeof formSchema>;
@@ -32,7 +31,7 @@ type Props = {
   disabled?: boolean;
 };
 
-export const UnitForm = ({
+export const InvoiceForm = ({
   id,
   defaultValues,
   onSubmit,
@@ -60,15 +59,15 @@ export const UnitForm = ({
       >
         <div className="flex gap-4 ">
           <FormField
-            name="name"
+            name="customerName"
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>name</FormLabel>
+                <FormLabel>customerName</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disabled}
-                    placeholder="e.g  credit card mwangi"
+                    placeholder="e.g  card mwangi"
                     {...field}
                   />
                 </FormControl>
@@ -76,15 +75,15 @@ export const UnitForm = ({
             )}
           />
           <FormField
-            name="phoneNo"
+            name="amount"
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone no:</FormLabel>
+                <FormLabel>amount</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disabled}
-                    placeholder="e.g 07********"
+                    placeholder="e.g 10,000 ksh"
                     {...field}
                   />
                 </FormControl>
@@ -94,15 +93,15 @@ export const UnitForm = ({
         </div>
         <div className="flex gap-4 ">
           <FormField
-            name="buildingName"
+            name="status"
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>building Name</FormLabel>
+                <FormLabel>status</FormLabel>
                 <FormControl>
                   <Input
                     disabled={disabled}
-                    placeholder="Hajoja App"
+                    placeholder="occupied"
                     {...field}
                   />
                 </FormControl>
@@ -112,7 +111,7 @@ export const UnitForm = ({
         
         </div>
         <Button className="w-full" disabled={disabled}>
-          {id ? "save changes" : "create unit account"}
+          {id ? "save changes" : "create invoice account"}
         </Button>
         {!!id && (
           <Button
@@ -123,7 +122,7 @@ export const UnitForm = ({
             variant="outline"
           >
             <Trash className="size-4 mr-2" />
-            Delete tenant
+            Delete invoice
           </Button>
         )}
       </form>

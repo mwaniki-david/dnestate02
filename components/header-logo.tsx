@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 
 
 export const HeaderLogo = () => {
@@ -7,9 +7,9 @@ export const HeaderLogo = () => {
         <Link href="/">
             <div className="items-center hidden lg:flex">
                 {/* <p className="font-extrabold text-3xl text-white">DNM</p> */}
-                <Image src="/logo.svg" alt="Logo" height={28} width={28}/>
+                {/* <Image src="/logo.svg" alt="Logo" height={28} width={28}/> */}
                 <p className="font-semibold text-white text-2xl ml-2.5">
-                    Estste
+                DNMEstate
                 </p>
             </div>
         </Link>

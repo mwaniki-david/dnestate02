@@ -1,3 +1,4 @@
+
 "use client";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table";
@@ -5,19 +6,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Plus } from "lucide-react";
 import { columns } from "./columns";
 import { Skeleton } from "@/components/ui/skeleton";
-import { UseNewBuilding } from "@/features/building/hooks/use-new-building";
-import { useGetBuildings } from "@/features/building/api/use-get-buildings";
-import { useBulkDeleteBuilding } from "@/features/building/api/use-bulk-delete-building";
+import { useBulkDeleteinvoice } from "@/features/billing/api/use-bulk-delete-invoice";
+import { useGetinvoices } from "@/features/billing/api/use-get-invoices";
+import { UseNewInvoice } from "@/features/billing/hooks/use-new-invoice";
 
-const BuildingPage = () => {
-  const newBuilding = UseNewBuilding();
-  const deleteBuilding = useBulkDeleteBuilding();
-  const buildingQuery = useGetBuildings();
-  const building = buildingQuery.data || [];
+const invoicePage = () => {
+  const newInvoice = UseNewInvoice();
+  const deleteinvoice = useBulkDeleteinvoice();
+  const invoiceQuery = useGetinvoices();
+  const invoice = invoiceQuery.data || [];
 
-  const isDisabled = buildingQuery.isLoading || deleteBuilding.isPending;
+  const isDisabled =
+    invoiceQuery.isLoading || deleteinvoice.isPending;
 
-  if (buildingQuery.isLoading) {
+  if (invoiceQuery.isLoading) {
     return (
       <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
         <Card className="border-none drop-shadow-sm">
@@ -38,8 +40,8 @@ const BuildingPage = () => {
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
       <Card className="border-none drop-shadow-sm">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
-          <CardTitle className="text-xl line-clamp-1">Buildings list</CardTitle>
-          <Button onClick={newBuilding.onOpen} size="sm">
+          <CardTitle className="text-xl line-clamp-1">invoice list</CardTitle>
+          <Button onClick={newInvoice.onOpen} size="sm">
             <Plus className="size-4 mr-2" />
             Add new
           </Button>
@@ -48,11 +50,11 @@ const BuildingPage = () => {
           <DataTable
             filterKey="name"
             onDelete={(row) => {
-              const ids = row.map((r) =>r.original.id);
-              deleteBuilding.mutate({ ids });
+              const ids = row.map((r) => r.original.id);
+              deleteinvoice.mutate({ ids });
             }}
             columns={columns}
-            data={building}
+            data={invoice}
             disabled={isDisabled}
           />
         </CardContent>
@@ -61,4 +63,4 @@ const BuildingPage = () => {
   );
 };
 
-export default BuildingPage;
+export default invoicePage;

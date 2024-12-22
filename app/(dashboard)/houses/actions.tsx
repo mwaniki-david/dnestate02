@@ -7,8 +7,8 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { useDeleteBuilding } from "@/features/building/api/use-delete-building ";
-import { UseOpenBuilding } from "@/features/building/hooks/use-open-building";
+import { useDeleteHouse } from "@/features/houses/api/use-delete-house";
+import { UseOpenHouse } from "@/features/houses/hooks/use-open-house";
 import { useConfirm } from "@/hooks/use-confirm";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
@@ -21,8 +21,8 @@ export const Actions = ( { id }: Props) => {
         "Are you sure?",
         "You are about to delete this tenant."
     );
-    const deleteMutation =useDeleteBuilding(id);
-    const { onOpen } = UseOpenBuilding();
+    const deleteMutation =useDeleteHouse(id);
+    const { onOpen } = UseOpenHouse();
 
     const handleDelete = async () => {
         const ok = await confirm();

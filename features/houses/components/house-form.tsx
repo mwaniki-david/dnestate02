@@ -166,7 +166,7 @@ export const HouseForm = ({
           /> */}
         </div>
         <Button className="w-full" disabled={disabled}>
-          {id ? "save changes" : "create building account"}
+          {id ? "save changes" : "create house account"}
         </Button>
         {!!id && (
           <Button

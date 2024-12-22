@@ -37,9 +37,9 @@ export const NewHouseSheet = () => {
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="space-y-4">
         <SheetHeader>
-          <SheetTitle>New Building</SheetTitle>
+          <SheetTitle>New House</SheetTitle>
           <SheetDescription>
-            cerate a new building account to track each transactions.
+            cerate a new House account to track each transactions.
           </SheetDescription>
         </SheetHeader>
         <HouseForm
@@ -47,7 +47,7 @@ export const NewHouseSheet = () => {
           disabled={mutation.isPending}
           defaultValues={{
             houseName: "",
-            rentalAmount: 12,
+            rentalAmount: "",
             phoneNo: "",
             unitType: "",
             buildingName: "",

@@ -1,4 +1,3 @@
-import { UseNewTenant } from "../hooks/use-new-tenant";
 import {
     Sheet,
     SheetContent,
@@ -6,27 +5,24 @@ import {
     SheetHeader,
     SheetTitle,
 } from "@/components/ui/sheet";
-import { TenantForm } from "./tenant-form";
-import { insertTenantSchema } from "@/db/schema";
-import { useCreateTenant } from "../api/use-create-tenant";
+import { inserInvoiceSchema } from "@/db/schema";
 import { z } from "zod";
-
-const formSchema = insertTenantSchema.pick({
-    name:true,
-    phoneNo: true,
-    buildingName: true,
-    rentalAmount: true,
-    unitName: true,
-    unitType: true,
-    
+import { UseNewInvoice } from "../hooks/use-new-invoice";
+import { useCreatinvoice } from "../api/use-create-invoice";
+import { InvoiceForm } from "./invoice-form";
+const formSchema = inserInvoiceSchema.pick({
+    customerName: true,
+    amount: true,
+    dueDate: true,
+    status: true,
 });
 
 type FormValues = z.input<typeof formSchema>;
 
 
-export const NewTenantSheet = () => {
-    const { isOpen, onClose } = UseNewTenant();
-    const mutation = useCreateTenant();
+export const NewInvoiceSheet = () => {
+    const { isOpen, onClose } = UseNewInvoice();
+    const mutation = useCreatinvoice();
     
 
 
@@ -45,22 +41,20 @@ export const NewTenantSheet = () => {
             <SheetContent  className="space-y-4">
                 <SheetHeader>
                     <SheetTitle>
-                        New Tenant
+                        New invoice
                     </SheetTitle>
                     <SheetDescription>
-                        cerate a new tenant account to track each transactions.
+                        cerate a invoice to track each transactions.
                     </SheetDescription>
                 </SheetHeader>
-                <TenantForm 
+                <InvoiceForm 
                 onSubmit={onSubmit} 
                 disabled={mutation.isPending}
                 defaultValues={{
-                    name: "",
-                    phoneNo: "",
-                    buildingName: "",
-                    rentalAmount: "",
-                    unitName: "",
-                    unitType: "",
+                    customerName:"",
+                    amount:"",
+                    dueDate: new Date().toISOString().split("T")[0], // Default to current date
+                    status:"",
                 }}
                 />
             </SheetContent>

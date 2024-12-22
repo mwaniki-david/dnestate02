@@ -58,7 +58,7 @@ export const NewTenantSheet = () => {
                     name: "",
                     phoneNo: "",
                     buildingName: "",
-                    rentalAmount: "",
+                    rentalAmount: 0,
                     unitName: "",
                     unitType: "",
                 }}

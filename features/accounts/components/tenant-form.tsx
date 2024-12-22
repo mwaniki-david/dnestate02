@@ -112,7 +112,7 @@ export const TenantForm = ({
               </FormItem>
             )}
           />
-          <FormField
+                    <FormField
             name="rentalAmount"
             control={form.control}
             render={({ field }) => (
@@ -121,13 +121,14 @@ export const TenantForm = ({
                 <FormControl>
                   <Input
                     disabled={disabled}
-                    placeholder="e.g ksh10,000"
+                    placeholder="e.g ksh10000"
                     {...field}
                   />
                 </FormControl>
               </FormItem>
             )}
           />
+          
         </div>
         <div className="flex gap-4 ">
         <FormField

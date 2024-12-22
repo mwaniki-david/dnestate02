@@ -6,6 +6,8 @@ import building from './building';
 import buildingOwner from './buildingOwner';
 import houses from './houses';
 import unit from './unit';
+import invoice from './invoice';
+import payments from './payments';
 
 export const runtime = 'edge';
 
@@ -15,6 +17,8 @@ export const  route = app
 .route('/building', building)
 .route('/buildingOwner', buildingOwner)
 .route('/houses', houses)
+.route('/invoice', invoice)
+.route('/payments', payments)
 .route('/unit', unit);
 
 export const GET = handle(app);
