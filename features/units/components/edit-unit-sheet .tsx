@@ -23,7 +23,7 @@ const UnitSchema = inserUnitrSchema.pick({
 
 type FormValues = z.input<typeof UnitSchema>;
 
-export const EditbuildingOwnerSheet = () => {
+export const EditUnitSheet = () => {
   const { isOpen, onClose, id } = UseOpenUnit();
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",

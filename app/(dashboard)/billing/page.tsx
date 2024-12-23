@@ -6,14 +6,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Plus } from "lucide-react";
 import { columns } from "./columns";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useBulkDeleteinvoice } from "@/features/billing/api/use-bulk-delete-invoice";
-import { useGetinvoices } from "@/features/billing/api/use-get-invoices";
 import { UseNewInvoice } from "@/features/billing/hooks/use-new-invoice";
+import { UseGetinvoices } from "@/features/billing/api/use-get-invoices";
+import { UseBulkDeleteinvoice } from "@/features/billing/api/use-bulk-delete-invoice";
+
 
 const invoicePage = () => {
   const newInvoice = UseNewInvoice();
-  const deleteinvoice = useBulkDeleteinvoice();
-  const invoiceQuery = useGetinvoices();
+  const deleteinvoice = UseBulkDeleteinvoice();
+  const invoiceQuery = UseGetinvoices();
   const invoice = invoiceQuery.data || [];
 
   const isDisabled =

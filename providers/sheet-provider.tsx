@@ -8,7 +8,9 @@ import { EditBuildingSheet } from "@/features/building/components/edit-building-
 import { NewBuildingSheet } from "@/features/building/components/new-building-sheet";
 import { EditbuildingOwnerSheet } from "@/features/buildingOwner/components/edit-buildingOwner-sheet ";
 import { NewBuildingOwnerSheet } from "@/features/buildingOwner/components/new-buildingOwner-sheet";
+import { EditHouseSheet } from "@/features/houses/components/edit-house-sheet ";
 import { NewHouseSheet } from "@/features/houses/components/new-house-sheet";
+import { EditUnitSheet } from "@/features/units/components/edit-unit-sheet ";
 import { NewunitSheet } from "@/features/units/components/new-unit-sheet";
 import { useEffect, useState } from "react";
 import { useMountedState } from "react-use";
@@ -22,8 +24,9 @@ export const SheetProvider = () => {
         <NewBuildingOwnerSheet/>
         <EditbuildingOwnerSheet/>
         <NewHouseSheet/>
-        {/* <EditHouseSheet/> */}
+        <EditHouseSheet/>
         <NewunitSheet/>
+        <EditUnitSheet/>
         <EditbuildingOwnerSheet/>
         <NewTenantSheet/>
         <EditTenantSheet/>
