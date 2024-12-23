@@ -23,8 +23,10 @@ export default function Page() {
           </ClerkLoading>
           </div> 
       </div>
-      <div className='h-full bg-blue-600 hidden lg:block items-center justify-center'>
+      <div className='h-full bg-red-900 hidden lg:block items-center justify-center'>
+        <div className='flex justify-center items-center mt-[270px]'>
         <Image src="/logo.svg" width={100} height={100} alt="logo"/>
+        </div>
         
       </div>
     </div>
